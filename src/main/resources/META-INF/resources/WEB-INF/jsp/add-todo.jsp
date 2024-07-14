@@ -3,18 +3,17 @@
 <head>
 <link rel="stylesheet" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
 	<title>
-		First Web app
+		Add Todo
 		</title>
 	</head>
 	<body>
 		<div class="container">
-		<h3>${invalid}</h3>
-		<!-- <h1>Welcome to the Login page ${name} !</h1> -->
-		<h1>Welcome to the Login page  !</h1>
+		
+		<h1>Enter your new ToDo!</h1>
 		<form method="Post">
-		Name : <input type="text" name="name">
-		Password : <input type="password" name="password">
-		<button type="submit" value="submit">Submit</submit>		
+		Description : <input type="text" name="description" required>
+		<button type="submit"  class ="btn btn-success">Submit</submit>
+			
 		</form>
 		</div>
 		
