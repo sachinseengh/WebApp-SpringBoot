@@ -1,5 +1,7 @@
-<html>
-	
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>	
 <head>
 <link rel="stylesheet" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
 	<title>
@@ -10,11 +12,14 @@
 		<div class="container">
 		
 		<h1>Enter your new ToDo!</h1>
-		<form method="Post">
-		Description : <input type="text" name="description" required>
+		<form:form method="Post" modelAttribute="todo">
+		Description : <form:input type="text" path="description" required = "required"/>
+		<form:errors path="description"/>
+		<form:input type="hidden" path="id"/>
+		<form:input type="hidden" path="done"/>
 		<button type="submit"  class ="btn btn-success">Submit</submit>
 			
-		</form>
+		</form:form>
 		</div>
 		
 		</body>

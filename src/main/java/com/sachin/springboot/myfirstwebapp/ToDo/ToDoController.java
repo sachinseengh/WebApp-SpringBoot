@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jakarta.validation.Valid;
+
 @Controller
 @SessionAttributes("name")
 public class ToDoController {
 
-	
-	
-	
 	public ToDoController(ToDoService todoService) {
 		super();
 		this.todoService = todoService;
@@ -35,17 +35,26 @@ public class ToDoController {
 	
 	
 	@RequestMapping(value="add-todo" ,method=RequestMethod.GET)
-	public String showNewToDoPage() {
+	public String showNewToDoPage(ModelMap model) {
+		String username =(String)model.get("name");
+		ToDo todo = new ToDo(0,username," ",LocalDate.now().plusYears(1),false);
+		model.put("todo", todo);
 		return "add-todo";
 	}
 	
 	@RequestMapping(value="add-todo" ,method=RequestMethod.POST)
-	public String AddNewTodo(@RequestParam String description,ModelMap model) {
+//	public String AddNewTodo(@Valid ToDo todo,ModelMap model,BindingResult result) {
+	public String AddNewTodo(ToDo todo,ModelMap model) {
 		
+		//Binding Result didn't worked here
+//		if(result.hasErrors()) {
+//		System.out.println(result);
+//		}
 		
-		todoService.addToDo((String)model.get("name"),description,LocalDate.now().plusYears(1), false);
+		todoService.addToDo((String)model.get("name"),todo.getDescription(),LocalDate.now().plusYears(1), false);
 		
 		return "redirect:todo-list";
+		
 	}
 	
 	

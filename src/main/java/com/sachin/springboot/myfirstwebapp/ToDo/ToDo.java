@@ -2,12 +2,17 @@ package com.sachin.springboot.myfirstwebapp.ToDo;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Size;
+
 public class ToDo {
 
 	
 	
-	private int id;
+	private int id; 
 	private String username;
+	
+//	BindingResult didn't worked
+	//@Size(min=10,message="Enter at least 10 character")
 	private String description;
 	private LocalDate target;
 	private Boolean done;
