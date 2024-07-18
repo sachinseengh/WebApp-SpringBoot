@@ -3,6 +3,7 @@ package com.sachin.springboot.myfirstwebapp.ToDo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,21 @@ public class ToDoService {
 		ToDo todo=new ToDo(++count,username,description,localdate,done);
 		todos.add(todo);
 	}
+	
+	public void deleteById(int id) {
+		Predicate<? super ToDo> predicate =todos-> todos.getId()==id;
+		todos.removeIf(predicate);
+	}
+	
+	public ToDo findById(int id) {
+		Predicate<? super ToDo> predicate =todos-> todos.getId()==id;
+		ToDo todo=todos.stream().filter(predicate).findFirst().get();
+		return todo;
+	}
+	public void updateTodo(ToDo todo) {
+		deleteById(todo.getId());
+		todos.add(todo);
+	}
+
+	
 }

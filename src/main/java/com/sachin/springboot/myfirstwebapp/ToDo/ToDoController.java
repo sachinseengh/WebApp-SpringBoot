@@ -57,6 +57,35 @@ public class ToDoController {
 		
 	}
 	
+	@RequestMapping("delete-todo")
+	public String DeleteTodo(@RequestParam int id,ModelMap model) {
+		
+		todoService.deleteById(id);
+		
+		return "redirect:todo-list";
+	}
+	
+	@RequestMapping("edit-todo")
+	public String ShowUpdateTodopage(@RequestParam int id,ModelMap model) {
+		
+     ToDo todo = todoService.findById(id);
+     model.addAttribute("todo",todo);
+     return "add-todo";
+	}
+	
+	@RequestMapping(value="edit-todo" ,method=RequestMethod.POST)
+	public String UpdateTodo(ToDo todo,ModelMap model) {
+	
+		
+		String username = (String)model.get("name");
+		todo.setUsername(username);
+		
+		todoService.updateTodo(todo);
+		return "redirect:todo-list";
+		
+	}
+	
+	
 	
 	
 	
